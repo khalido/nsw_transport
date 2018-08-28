@@ -13,6 +13,10 @@ realtime_positions_api = "https://api.transport.nsw.gov.au/v1/gtfs/vehiclepos/"
 # https://opendata.transport.nsw.gov.au/node/328/exploreapi
 realtime_trip_updates_api = "https://api.transport.nsw.gov.au/v1/gtfs/realtime/"
 
+# Public Transport - Timetables - For Realtime
+# https://opendata.transport.nsw.gov.au/node/332/exploreapi
+realtime_timetable_api = "https://api.transport.nsw.gov.au/v1/gtfs/schedule/"
+
 def save_to_disk(object, filename):
     "takes in a object and filename and pickles to disk"
     with open(filename, 'wb') as f:
