@@ -1,6 +1,12 @@
 # ignore protuf files
 *.pb
 
+# ignore zip files
+*.zip
+
+# mac
+*.DS_Store*
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
