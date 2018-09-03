@@ -11,11 +11,23 @@ NSW Transit and it seems just about every other transit system in the world flin
 So there are two types of feeds we are looking at:
 
 - [GTFS](https://developers.google.com/transit/gtfs/reference/) - this is a set of zipped csv files. For NSW transport the [details are here](https://opendata.transport.nsw.gov.au/node/332/exploreapi).
-= [GTFS Realtime](https://developers.google.com/transit/gtfs-realtime/) - this is a protobuf which sort of looks like a json but isn't, and is parsed using the libary above.
+- [GTFS Realtime](https://developers.google.com/transit/gtfs-realtime/) - this is a protobuf which sort of looks like a json but isn't, and is parsed using the libary above.
 
 ### reading GTFS
 
-GTFS is just a zip file, so using requests to download it and pandas to make sense of the many csv files it contains.
+GTFS is just a zip file, so using requests to download it and pandas to make sense of the many csv files it contains. The NSW timetable is ~100MB, download it like so. Each api has a base url, then a slug to choose b/w buses, train and so on data.
+
+```python
+headers = {'Authorization': 'apikey ' + "TOP_SECRET_KEY"}
+r = requests.get(url + "buses", headers=headers, stream=True)
+    
+if r.status_code == 200:
+    filename = "timetable_" + \
+        f"{datetime.now(tz=timezone):%Y-%m-%d-%H-%M-%S-%Z}.zip"
+    with open(filename, 'wb') as fd:
+        for chunk in r.iter_content(chunk_size=256):
+            fd.write(chunk)
+```
 
 ### reading GTFS Realtime
 
