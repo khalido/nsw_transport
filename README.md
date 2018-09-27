@@ -2,20 +2,18 @@
 
 looking at NSW transports realtime data, inspired by https://github.com/katharosada/bus-shaming
 
-## all the libraries
+## the data feeds
 
 NSW Transit and it seems just about every other transit system in the world flings data around using Google's data standards.
-
-> [GTFS-realtime](https://developers.google.com/transit/gtfs-realtime/) is a data format for communicating real-time information about public transit systems. GTFS-realtime data is encoded and decoded using [Protocol Buffers](https://developers.google.com/protocol-buffers/), a compact binary representation designed for fast and efficient processing. 
 
 So there are two types of feeds we are looking at:
 
 - [GTFS](https://developers.google.com/transit/gtfs/reference/) - this is a set of zipped csv files. For NSW transport the [details are here](https://opendata.transport.nsw.gov.au/node/332/exploreapi).
-- [GTFS Realtime](https://developers.google.com/transit/gtfs-realtime/) - this is a protobuf which sort of looks like a json but isn't, and is parsed using the libary above.
+- [GTFS Realtime](https://developers.google.com/transit/gtfs-realtime/) - this is real time data encoded using [Protocol Buffers](https://developers.google.com/protocol-buffers/), which is a binary squishing of the date. and when decoded sort of looks like a json file with many nested fields to look at.
 
 ### reading GTFS
 
-GTFS is just a zip file, so using requests to download it and pandas to make sense of the many csv files it contains. The NSW timetable is ~100MB, download it like so. Each api has a base url, then a slug to choose b/w buses, train and so on data.
+GTFS is just a zip file, so using requests to download it and pandas to make sense of the many csv files it contains. The NSW timetable is ~100MB,. Each api has a base url, then a slug to choose b/w buses, train and so on data.
 
 ```python
 headers = {'Authorization': 'apikey ' + "TOP_SECRET_KEY"}
